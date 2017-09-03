@@ -66,8 +66,61 @@ function parce_variable_arg() {
         echo eval('return '. implode($arithmetic, $array_param) . ";")."<br>".PHP_EOL;
          
      }else{
+         echo "В начале введен не арифметический знак";
          return false;
      }
 }
 
-parce_variable_arg('-',1,5,3,10);
+parce_variable_arg("+",1.8,5,3,10);
+
+//Задание No4
+//Функция должна принимать два параметра – целые числа. Если в функцию
+//переданы не целые числа, то функция должна выводить ошибку на экран и
+//завершать работу. Если в функцию передали 2 целых числа, то функция
+//должна отобразить таблицу умножения размером со значения параметров,
+//переданных в функцию.
+//Например: tabl(4,3), то функция должна нарисовать следующий результат:
+//1 2 3 4
+//2 4 6 8
+//3 6 9 12
+
+function draw_table_pifaroga($numb_gorizont, $numb_vertical) {
+    if ( is_int($numb_gorizont) & is_int($numb_vertical) 
+            & $numb_gorizont > 0 
+            & $numb_vertical > 0){
+       for ($i = 1; $i <= $numb_vertical; $i++){
+           for ($j = 1; $j <= $numb_gorizont; $j++){
+               echo $j *  $i;
+               echo ' ';
+           }
+           echo '<br>';
+       }
+    }else{
+        echo "Error! The number isn't Integer!";
+        return false;
+    }
+}
+
+draw_table_pifaroga(5, 5);
+
+//Задание No5
+//Функция должна принимать в качестве аргумента массив чисел и возвращать
+//так же массив, но отсортированный по возрастанию.
+//Пример: В функцию передали [1, 22, 5, 66, 3, 57]. Вернула: [1, 3, 5, 22, 57, 66]
+
+function sort_array($array) {
+    echo 'Начальный массив'.'<br>';
+    foreach ($array as $value) {
+        echo $value.' ';
+    };
+    sort($array);
+    echo '<br>';
+    echo 'Отсортированный массив'.'<br>';
+    foreach ($array as $value) {
+        echo $value.' ';
+    };
+    echo '<br>';
+}
+
+$array = [5,8,9,25,1,4,8,25,169];
+sort_array($array);
