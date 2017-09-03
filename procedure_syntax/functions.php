@@ -124,3 +124,98 @@ function sort_array($array) {
 
 $array = [5,8,9,25,1,4,8,25,169];
 sort_array($array);
+
+//Задание No6
+//Создать рекурсивную функцию, которая принимает два целых числа,
+//начальное и конечное значения, диапазон. Функция должна вывести список
+//нечётных чисел в заданном диапазоне.
+//Например: В функцию передали: 10 и 35. Функция должна вывести список
+//нечётных чисел в диапазоне от 10 до 35.
+
+function print_odd_numbers($number1, $number2) {
+    if (is_int($number1) & is_int($number2)){
+        if ($number1 <= $number2){
+            if ($number1 % 2 != 0){
+                echo $number1." ";
+                $number1++;
+                print_odd_numbers($number1, $number2);
+            }else{
+                $number1++;
+                print_odd_numbers($number1, $number2);
+            }
+        }else{
+            return false;
+        }
+    }else{
+        echo "Error! The numbers isn't integer";
+        return false;
+    }
+}
+
+print_odd_numbers(10, 104);
+
+echo '<br>';
+
+//Задание No7
+//Функция принимает 1 строковый параметр и возвращает TRUE, если строка
+//является палиндромом, FALSE в противном случае.
+//Палиндром – строка, одинаково читающаяся в обоих направлениях.
+
+function is_palindrom($string) {
+    //$string = str_replace(' ','',$string);
+    $string = preg_replace('/\s/','',$string);
+    $string_reverse = strrev($string);
+    if (strcasecmp($string, $string_reverse) === 0){
+        echo 'is palindrom!';
+        return TRUE;
+    }else{
+        echo "isn't palindrom";
+    }        
+}
+
+is_palindrom("Able was I ere I saw Elba");
+echo '<br>';
+
+//Задание No8
+//1. Создать 3 функции, принимающие по 1 строковому параметру и выводящие
+//на экран разные фразы с переданным параметром.
+//2. Создать 4ю функцию, которая будет принимать 2 параметра:
+//а) целое число
+//б) строку и в зависимости от переданного числа функция должна вызвать
+//одну из трёх функций со строковым параметром (1 – первая ф-ия, 2 –
+//вторая, 3 -третья).
+//3. Четвёртая функция также должна обрабатывать некорректный ввод целого
+//числа.
+
+function print_string1($string = "Hello world!") {
+    echo $string."<br>";
+}
+
+function print_string2($string = "Bye everyone!") {
+    echo $string."<br>";
+}
+
+function print_string3($string = "It's a sheet") {
+    echo $string."<br>";
+}
+
+function check_number($number) {
+    if (!is_int($number) || $number <= 0){
+        echo "Error! The number isn't integer or less than 0";
+        return false;
+    }
+}
+
+function get_function($number, $string) {
+    check_number($number);
+    $name_function = "print_string".$number;
+    if(function_exists($name_function)){
+        $func = $name_function;
+        $func();   
+    }else{
+        echo "Error! The function doesn't exist";
+        return false;
+    }
+}
+
+get_function(3, "Hello");
